@@ -9,7 +9,7 @@ namespace Properties
 {
     public class Lehrer
     {
-        public string Zuname { get; set; } = string.Empty;
+        public string? Zuname { get; set; }  
         public string Vorname { get; set; } = string.Empty;
         public decimal? Bruttogehalt 
         {
@@ -23,12 +23,19 @@ namespace Properties
 
         public string Kuerzel
         {
-            get { return Zuname?.Substring(0,3)?.ToUpper() ?? " "; }
+            get
+            {
+                if (Zuname?.Length >= 3)
+                {
+                    return Zuname.Substring(0, 3).ToUpper();
+                }
+                return "";
+            } 
         }
 
         public decimal Nettogehalt
         {
-            get { return _bruttogehalt ?? 0 * 0.8M; }
+            get { return _bruttogehalt is null ? 0 : _bruttogehalt.Value * 0.8M ; }
         }
     }
 }
