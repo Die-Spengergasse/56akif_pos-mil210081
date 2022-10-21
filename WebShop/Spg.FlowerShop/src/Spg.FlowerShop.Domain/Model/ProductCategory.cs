@@ -8,6 +8,6 @@
 
         public string Description { get; set; } = string.Empty;
 
-        public List<Product> ProductList { get; set; } = new();
+        public List<Product> Products { get; set; } = new();
     }
 }

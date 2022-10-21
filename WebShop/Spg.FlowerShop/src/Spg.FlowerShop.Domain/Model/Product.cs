@@ -20,10 +20,10 @@ namespace Spg.FlowerShop.Domain.Model
 
         public string ProductImage { get; set; } = string.Empty;
 
-        public List<Price> PriceList { get; set; } = new(); 
+        public List<Price> Prices { get; set; } = new(); 
 
-        public List<Review> ReviewList { get; set; } = new();
+        public List<Review> Reviews { get; set; } = new();
 
-        public List<ShoppingCartItem> ShoppingCartItemList { get; set; } = new();
+        public List<ShoppingCartItem> ShoppingCartItems { get; set; } = new();
     }
 }

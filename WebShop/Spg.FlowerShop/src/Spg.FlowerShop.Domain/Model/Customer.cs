@@ -34,7 +34,7 @@ namespace Spg.FlowerShop.Domain.Model
         // 1 Customer kann mehr ShoppingCarts haben
         public List<ShoppingCart> ShoppingCarts { get; set; } = new();
 
-        public List<Review> ReviewList { get; set; } = new();
+        public List<Review> Reviews { get; set; } = new(); 
 
     }
 }
