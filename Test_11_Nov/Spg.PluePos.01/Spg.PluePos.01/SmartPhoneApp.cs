@@ -38,6 +38,7 @@ namespace Spg.PluePos._01
                     a.Concat(post.Html).Concat("\n");
                 }
             }
+            Console.WriteLine(a);
             return a;
         }
 
@@ -48,6 +49,7 @@ namespace Spg.PluePos._01
             {
                 a += post.Rating;
             }
+            Console.WriteLine(a);   
             return a;
         }
 
