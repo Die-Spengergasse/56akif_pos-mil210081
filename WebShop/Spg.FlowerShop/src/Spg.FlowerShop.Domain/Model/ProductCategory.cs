@@ -2,12 +2,24 @@
 {
     public class ProductCategory
     {
-        public int Id { get; set; }
+        public int Id { get; }
 
         public string Name { get; set; } = string.Empty;
 
         public string Description { get; set; } = string.Empty;
 
-        public List<Product> Products { get; set; } = new();
+        public List<Product> _products = new();
+        public IReadOnlyList<Product> Products => _products;
+
+        public ProductCategory(int id, string name, string description)
+        {
+            Id = id;
+            Name = name;
+            Description = description;
+        }
+
+        public ProductCategory()
+        {
+        }
     }
 }

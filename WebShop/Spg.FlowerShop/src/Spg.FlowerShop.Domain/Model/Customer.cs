@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spg.FlowerShop.Domain.Model
+﻿namespace Spg.FlowerShop.Domain.Model
 {
     public enum Genders // enumeration
     { 
@@ -23,18 +17,35 @@ namespace Spg.FlowerShop.Domain.Model
         public string LastName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public DateTime BirthDate { get; set; } // = DateTime.MinValue; [optional]
-        public string ShippingAddress { get; set; } = string.Empty; // default Wert
+        public string ShippingAddress { get; set; } = string.Empty; 
         public string BillingAddress { get; set; } = string.Empty; 
-        public DateTime RegistrationDateTime { get; set; } 
+        public DateTime RegistrationDateTime { get; }
+
+        // 1 Customer kann mehr ShoppingCarts haben
+        public List<ShoppingCart> _shoppingCarts = new();
+        public IReadOnlyList<ShoppingCart> ShoppingCarts => _shoppingCarts;
+
+        public List<Review> _reviews = new();
+        public IReadOnlyList<Review> Reviews => _reviews;
+        public Customer(Genders gender, string customerNumber, string firstName, string lastName, string email, DateTime birthDate, string shippingAddress, string billingAddress, DateTime registrationDateTime)
+        {
+            Gender = gender;
+            CustomerNumber = customerNumber;
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            BirthDate = birthDate;
+            ShippingAddress = shippingAddress;
+            BillingAddress = billingAddress;
+            RegistrationDateTime = registrationDateTime;
+        }
+
+        public Customer()
+        {
+        }
 
         // TO DO : Authentification 
         // TO DO : Username
         // TO DO : Password string
-
-        // 1 Customer kann mehr ShoppingCarts haben
-        public List<ShoppingCart> ShoppingCarts { get; set; } = new();
-
-        public List<Review> Reviews { get; set; } = new(); 
-
     }
 }

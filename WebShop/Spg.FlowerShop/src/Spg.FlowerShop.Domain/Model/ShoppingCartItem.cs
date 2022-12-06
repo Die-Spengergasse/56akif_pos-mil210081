@@ -1,19 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spg.FlowerShop.Domain.Model
+﻿namespace Spg.FlowerShop.Domain.Model
 {
     public class ShoppingCartItem
     {
-        public int Id { get; set; }
+        public int Id { get; }
 
         public int ItemCount { get; set; }
 
         public Product Product { get; set; } = default!;
 
         public ShoppingCart ShoppingCart { get; set; } = default!;
+
+        public ShoppingCartItem(int id, int itemCount, Product product, ShoppingCart shoppingCart)
+        {
+            Id = id;
+            ItemCount = itemCount;
+            Product = product;
+            ShoppingCart = shoppingCart;
+        }
+        public ShoppingCartItem()
+        {
+        }
     }
 }

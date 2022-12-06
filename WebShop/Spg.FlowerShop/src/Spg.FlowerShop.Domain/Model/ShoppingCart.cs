@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spg.FlowerShop.Domain.Model
+﻿namespace Spg.FlowerShop.Domain.Model
 {
     public enum Status // enumeration
     {
@@ -16,21 +10,36 @@ namespace Spg.FlowerShop.Domain.Model
 
     public class ShoppingCart
     {
-        public Status Status { get; set; } 
+        public Status Status { get; set; }
 
-        public int Id { get; set; }
+        public int Id { get; }
 
         public int ItemsCount { get; set; }
 
-        public DateTime SoldOn { get; set; } 
+        public DateTime SoldOn { get; set; } //auto-calculated???
 
         public Customer CustomerNavigation { get; set; } = default!; // du(dieser ShoppingCart) gehoerst einem Customer
 
-        public List<ShoppingCartItem> ShoppingCartItems { get; set; } = new(); // leere Liste, wie im DB
+        public List<ShoppingCartItem> _shoppingCartItems = new(); // leere Liste, wie im DB
 
-        public Status StatusNavigation { get; set; } = default!;
+        public IReadOnlyList<ShoppingCartItem> ShoppingCartItems => _shoppingCartItems;
 
-        public PaymentMethod PaymentMethod { get; set; } = default!;  
+
+        public PaymentMethod PaymentMethod { get; set; } = default!;
+
+        public ShoppingCart(Status status, int id, int itemsCount, DateTime soldOn, Customer customerNavigation, PaymentMethod paymentMethod)
+        {
+            Status = status;
+            Id = id;
+            ItemsCount = itemsCount;
+            SoldOn = soldOn;
+            CustomerNavigation = customerNavigation;
+            PaymentMethod = paymentMethod;
+        }
+
+        public ShoppingCart()
+        {
+        }
     }
 
 }
