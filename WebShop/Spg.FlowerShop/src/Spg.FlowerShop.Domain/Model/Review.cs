@@ -2,30 +2,28 @@
 {
     public class Review
     {
-        public string Id { get; } = string.Empty;
+        public int Id { get; }
 
-        public Customer Customer { get; set; } = default!;  
+        public int CustomerNavigationId { get; set; }
+        public Customer CustomerNavigation { get; set; } = default!;
 
-        public Product Product { get; set; } = default!;
+        public string ProductNavigationId { get; set; } = string.Empty; 
+        public Product ProductNavigation { get; set; } = default!;
 
-        public DateTime ReviewDate { get; set; } 
+        public DateTime ReviewDate { get; } 
 
         public int ReviewScore { get; set; }
 
         public string Description { get; set; } = string.Empty;
 
-        public Review(string id, Customer customer, Product product, DateTime reviewDate, int reviewScore, string description)
+        public Review(DateTime reviewDate, int reviewScore, string description)
         {
-            Id = id;
-            Customer = customer;
-            Product = product;
             ReviewDate = reviewDate;
             ReviewScore = reviewScore;
             Description = description;
         }
-        public Review()
-        {
-        }
-
+        protected Review()
+        { }
+ 
     }
 }

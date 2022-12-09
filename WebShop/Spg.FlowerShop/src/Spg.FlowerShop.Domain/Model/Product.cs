@@ -2,39 +2,34 @@
 {
     public class Product
     {
-        public int Id { get; }
+        public string ProductName { get; } = string.Empty;  // pk
 
-        public string ProductName { get; set; } = string.Empty;
-
-        public decimal CurrentPrice { get; set; } 
+        // public decimal CurrentPrice { get; } 
 
         public string ProductDescription { get; set; } = string.Empty;
 
-        public ProductCategory ProductCategory { get; set; } = default!;
+        public string ProductCategoryNavigationId { get; set; } = string.Empty;
+        public ProductCategory ProductCategoryNavigation { get; set; } = default!; 
 
         public string ProductImage { get; set; } = string.Empty;
-                
-        public List<Price> _prices = new();
+
+        private List<Price> _prices = new();
         public IReadOnlyList<Price> Prices => _prices;
-                
-        public List<Review> _reviews = new();
+
+        private List<Review> _reviews = new();
         public IReadOnlyList<Review> Reviews => _reviews;
                 
-        public List<ShoppingCartItem> _shoppingCartItems = new();
+        private List<ShoppingCartItem> _shoppingCartItems = new();
         public IReadOnlyList<ShoppingCartItem> ShoppingCartItems => _shoppingCartItems;
 
-        public Product(int id, string productName, decimal currentPrice, string productDescription, ProductCategory productCategory, string productImage)
+        public Product(string productName, string productDescription, string productImage)
         {
-            Id = id;
             ProductName = productName;
-            CurrentPrice = currentPrice;
+            // CurrentPrice = currentPrice;
             ProductDescription = productDescription;
-            ProductCategory = productCategory;
             ProductImage = productImage;
         }
-
-        public Product()
-        {
-        }
+        protected Product()
+        { }
     }
 }

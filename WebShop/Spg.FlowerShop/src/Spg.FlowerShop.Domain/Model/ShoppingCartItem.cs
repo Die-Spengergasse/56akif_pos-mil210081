@@ -3,22 +3,19 @@
     public class ShoppingCartItem
     {
         public int Id { get; }
-
         public int ItemCount { get; set; }
 
-        public Product Product { get; set; } = default!;
+        public int ProductNavigationId { get; set; }    // vk ; brauche ich set?
+        public Product ProductNavigation { get; set; } = default!;
+        public int ShoppingCartNavigationId { get; set; }   // vk ; brauche ich set?
+        public ShoppingCart ShoppingCartNavigation { get; set; } = default!;
 
-        public ShoppingCart ShoppingCart { get; set; } = default!;
+        protected ShoppingCartItem()
+        { }
 
-        public ShoppingCartItem(int id, int itemCount, Product product, ShoppingCart shoppingCart)
+        public ShoppingCartItem(int itemCount)
         {
-            Id = id;
             ItemCount = itemCount;
-            Product = product;
-            ShoppingCart = shoppingCart;
-        }
-        public ShoppingCartItem()
-        {
         }
     }
 }

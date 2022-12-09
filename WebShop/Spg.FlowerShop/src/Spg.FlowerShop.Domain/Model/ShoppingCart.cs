@@ -10,36 +10,29 @@
 
     public class ShoppingCart
     {
-        public Status Status { get; set; }
-
         public int Id { get; }
 
-        public int ItemsCount { get; set; }
+        public Status Status { get; set; }
 
-        public DateTime SoldOn { get; set; } //auto-calculated???
+        public DateTime? SoldOn { get; set; } //auto-calculated??? brauche ich set?
 
-        public Customer CustomerNavigation { get; set; } = default!; // du(dieser ShoppingCart) gehoerst einem Customer
+        public int CustomerNavigationId { get; set; }
+        public Customer CustomerNavigation { get; set; } = default!; // du(dieser ShoppingCart) gehoerst einem CustomerNavigation
 
-        public List<ShoppingCartItem> _shoppingCartItems = new(); // leere Liste, wie im DB
+        private List<ShoppingCartItem> _shoppingCartItems = new(); // leere Liste, wie im DB
 
         public IReadOnlyList<ShoppingCartItem> ShoppingCartItems => _shoppingCartItems;
 
-
+        public int PaymentMethodId { get; set; }
         public PaymentMethod PaymentMethod { get; set; } = default!;
 
-        public ShoppingCart(Status status, int id, int itemsCount, DateTime soldOn, Customer customerNavigation, PaymentMethod paymentMethod)
+        public ShoppingCart(Status status, DateTime soldOn)
         {
             Status = status;
-            Id = id;
-            ItemsCount = itemsCount;
             SoldOn = soldOn;
-            CustomerNavigation = customerNavigation;
-            PaymentMethod = paymentMethod;
         }
-
-        public ShoppingCart()
-        {
-        }
+        protected ShoppingCart()
+        { }
     }
 
 }

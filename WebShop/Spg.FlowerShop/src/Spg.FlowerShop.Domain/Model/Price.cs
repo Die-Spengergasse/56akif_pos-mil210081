@@ -10,18 +10,17 @@
 
         public DateTime? ValidTo { get; set; }
 
-        public Product Product { get; set; } = default!;
+        public string ProductNavigationId { get; set; } = string.Empty; 
+        public Product ProductNavigation { get; set; } = default!;
 
-        public Price(int id, decimal value, DateTime validFrom, DateTime? validTo, Product product)
+        public Price(decimal value, DateTime validFrom, DateTime? validTo)
         {
-            Id = id;
             Value = value;
             ValidFrom = validFrom;
             ValidTo = validTo;
-            Product = product;
         }
-        public Price()
-        {
-        }
+
+        protected Price()
+        { }
     }
 }
