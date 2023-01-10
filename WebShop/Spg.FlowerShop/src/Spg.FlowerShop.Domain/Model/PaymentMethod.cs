@@ -2,8 +2,6 @@
 {
     public class PaymentMethod
     {
-        public int Id { get; }  // ?
-
         public string Name { get; set; } = string.Empty;
 
         private List<ShoppingCart> _shoppingCarts = new();

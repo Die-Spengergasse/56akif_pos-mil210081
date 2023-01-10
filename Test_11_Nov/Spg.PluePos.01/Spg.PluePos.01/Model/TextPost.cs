@@ -26,7 +26,7 @@ namespace Spg.PluePos._01.Model
                 {
                     throw new ArgumentNullException("Content war NULL!");
                 }
-                return $"<h1>{Title}</h1><p>{Content}</p>";
+                return $"<h1>{base.Title}</h1><p>{Content}</p>"; // base optional
             }
         }
 

@@ -9,7 +9,7 @@ namespace Spg.PluePos._01
 {
     public class SmartPhoneApp : List<Post>
     {
-        public List<Post> posts { get; set; } = new List<Post>();
+        // public List<Post> posts { get; set; } = new List<Post>();
 
         public string SmartPhoneId { get; set; } = string.Empty;
 
@@ -22,25 +22,36 @@ namespace Spg.PluePos._01
         {
             if (p != null)
             {
-                this.posts.Add(p);
+                base.Add(p);
                 p.SmartPhone = this;
             }
         }
 
         public string ProcessPosts()
         {
+            StringBuilder a = new StringBuilder();
+
+            foreach (Post post in this) // die Klass
+            {
+                a.Append(post.ToString());
+            }
+            Console.WriteLine(a);
+            return a.ToString();
+        }
+
+        /*
+        public string ProcessPosts1()
+        {
             string a = string.Empty;
+            StringBuilder sb =new StringBuilder();
 
             foreach (Post post in this)
             {
-                if (a != null)
-                {
-                    a.Concat(post.Html).Concat("\n");
-                }
+                sb.AppendLine(post.Html);
             }
             Console.WriteLine(a);
             return a;
-        }
+        }*/
 
         public int CalcRating()
         {
@@ -49,28 +60,13 @@ namespace Spg.PluePos._01
             {
                 a += post.Rating;
             }
-            Console.WriteLine(a);   
+            Console.WriteLine(a);
             return a;
         }
 
-        /*
-        public string this[string title]
+        public Post this[string title]
         {
-            get
-            { return Post.[title].Html ?? null; }
-
-            Dictionary<string, Post> _posts = new Dictionary<string, Post>();
-            public Post SmartPhoneAppIterator(string title)
-            {
-                foreach (Post p in _posts)
-                {
-                    if (_posts[title].Html == "TextPost 6")
-                    {
-                        return p;
-                    }
-                }
-                return null;
+            get { return this.FirstOrDefault(p => p.Title.Equals(title)); }
         }
-    }*/
     }
 }

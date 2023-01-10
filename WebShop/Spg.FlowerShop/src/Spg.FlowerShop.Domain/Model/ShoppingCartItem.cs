@@ -2,7 +2,7 @@
 {
     public class ShoppingCartItem
     {
-        public int Id { get; }
+        public int Id { get; private set; }
         public int ItemCount { get; set; }
 
         public int ProductNavigationId { get; set; }    // vk ; brauche ich set?

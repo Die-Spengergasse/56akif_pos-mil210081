@@ -2,7 +2,7 @@
 {
     public class Review
     {
-        public int Id { get; }
+        public int Id { get; private set; }
 
         public int CustomerNavigationId { get; set; }
         public Customer CustomerNavigation { get; set; } = default!;

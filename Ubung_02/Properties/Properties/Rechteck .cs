@@ -6,10 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
+
 namespace Properties
 {
     public class Rechteck
-    {   
+    {   /*
         public int Laenge 
         { 
           get { return _laenge; }
@@ -31,5 +32,15 @@ namespace Properties
         {
             get { return _laenge * _breite; }
         }
+    }*/
+
+    public int Laenge
+        {
+            get { return _laenge; }
+            set { _laenge = value > 0}
+        }
+        private int _laenge;
+
     }
-}
+
+

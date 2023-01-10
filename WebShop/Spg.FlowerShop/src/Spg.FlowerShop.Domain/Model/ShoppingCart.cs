@@ -10,7 +10,7 @@
 
     public class ShoppingCart
     {
-        public int Id { get; }
+        public int Id { get; private set; }
 
         public Status Status { get; set; }
 
@@ -23,8 +23,8 @@
 
         public IReadOnlyList<ShoppingCartItem> ShoppingCartItems => _shoppingCartItems;
 
-        public int PaymentMethodId { get; set; }
-        public PaymentMethod PaymentMethod { get; set; } = default!;
+        public string PaymentMethodId { get; set; } = string.Empty;
+        public PaymentMethod PaymentMethod { get; set; } = default!; // fali Navigation
 
         public ShoppingCart(Status status, DateTime soldOn)
         {

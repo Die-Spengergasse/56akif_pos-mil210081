@@ -2,14 +2,14 @@
 {
     public class Product
     {
-        public string ProductName { get; } = string.Empty;  // pk
+        public string ProductName { get; private set; } = string.Empty;  // pk
 
-        // public decimal CurrentPrice { get; } 
+        public decimal CurrentPrice { get; } // aber redundant in db
 
         public string ProductDescription { get; set; } = string.Empty;
 
         public string ProductCategoryNavigationId { get; set; } = string.Empty;
-        public ProductCategory ProductCategoryNavigation { get; set; } = default!; 
+        public ProductCategory ProductCategoryNavigation { get; set; } = default!; // vk
 
         public string ProductImage { get; set; } = string.Empty;
 
@@ -25,7 +25,7 @@
         public Product(string productName, string productDescription, string productImage)
         {
             ProductName = productName;
-            // CurrentPrice = currentPrice;
+            //CurrentPrice = currentPrice;
             ProductDescription = productDescription;
             ProductImage = productImage;
         }

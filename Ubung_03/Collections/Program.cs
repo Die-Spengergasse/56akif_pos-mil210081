@@ -1,87 +1,104 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System;
 using System.Collections.Generic;
+using System.Text;
+using ExCollection.App;
 using Newtonsoft.Json;
 
 namespace ExCollection.App
 {
-    class Klasse
-    {
-        // TODO: Erstelle ein Property Schuelers, welches alle Schüler der Klasse in einer
-        //       Liste speichert.
-        public string Name { get; set; } = string.Empty;
-        public string KV { get; set; } = string.Empty; 
-        public List<Schueler> Schuelers { get; set; } = new List<Schueler>();
-
-        /// <summary>
-        /// Fügt den Schüler zur Liste hinzu und setzt das Property KlasseNavigation
-        /// des Schülers korrekt auf die aktuelle Instanz.
-        /// </summary>
-        /// <param name="s"></param>
-        public void AddSchueler(Schueler s)
-        {
-            if (s != null)
-            {
-                Schuelers.Add(s);
-                s.KlasseNavigation = this;
-            }
-        }
-    }
-    class Schueler
-    {
-        // TODO: Erstelle ein Proeprty KlasseNavigation vom Typ Klasse, welches auf
-        //       die Klasse des Schülers zeigt.
-        // Füge dann über das Proeprty die Zeile
-        // [JsonIgnore]
-        // ein, damit der JSON Serializer das Objekt ausgeben kann.
-       
-        public int Id { get; set; } 
-        public string Zuname { get; set; } = string.Empty;
-        public string Vorname { get; set; } = string.Empty;
-        [JsonIgnore]
-        public Klasse KlasseNavigation { get; set; } = new Klasse();
-
-        /// <summary>
-        /// Ändert die Klassenzugehörigkeit, indem der Schüler
-        /// aus der alten Klasse, die in KlasseNavigation gespeichert ist, entfernt wird.
-        /// Danach wird der Schüler in die neue Klasse mit der korrekten Navigation eingefügt.
-        /// </summary>
-        /// <param name="k"></param>
-        public void ChangeKlasse(Klasse k)
-        {
-            if (k != null)
-            {
-                this.KlasseNavigation.Schuelers.Remove(this);
-                k.AddSchueler(this);
-            }
-        }
-    }
-
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            Dictionary<string, Klasse> klassen = new Dictionary<string, Klasse>();
-            klassen.Add("3AHIF", new Klasse() { Name = "3AHIF", KV = "KV1" });
-            klassen.Add("3BHIF", new Klasse() { Name = "3BHIF", KV = "KV2" });
-            klassen.Add("3CHIF", new Klasse() { Name = "3CHIF", KV = "KV3" });
-            klassen["3AHIF"].AddSchueler(new Schueler() { Id = 1001, Vorname = "VN1", Zuname = "ZN1" });
-            klassen["3AHIF"].AddSchueler(new Schueler() { Id = 1002, Vorname = "VN2", Zuname = "ZN2" });
-            klassen["3AHIF"].AddSchueler(new Schueler() { Id = 1003, Vorname = "VN3", Zuname = "ZN3" });
-            klassen["3BHIF"].AddSchueler(new Schueler() { Id = 1011, Vorname = "VN4", Zuname = "ZN4" });
-            klassen["3BHIF"].AddSchueler(new Schueler() { Id = 1012, Vorname = "VN5", Zuname = "ZN5" });
-            klassen["3BHIF"].AddSchueler(new Schueler() { Id = 1013, Vorname = "VN6", Zuname = "ZN6" });
+            Dictionary<string, SchoolClass> schoolClasses = new Dictionary<string, SchoolClass>();
+            schoolClasses.Add("3AHIF", new SchoolClass() { Name = "3AHIF", KV = "KV1" });
+            schoolClasses.Add("3BHIF", new SchoolClass() { Name = "3BHIF", KV = "KV2" });
+            schoolClasses.Add("3CHIF", new SchoolClass() { Name = "3CHIF", KV = "KV3" });
+            schoolClasses["3AHIF"].AddSchueler(new Student() { Id = 1001, FirstName = "VN1", LastName = "ZN1", MaximaleStudiendauer = 5 });
+            schoolClasses["3AHIF"].AddSchueler(new Student() { Id = 1002, FirstName = "VN2", LastName = "ZN2", MaximaleStudiendauer = 2 });
+            schoolClasses["3AHIF"].AddSchueler(new Student() { Id = 1003, FirstName = "VN3", LastName = "ZN3", MaximaleStudiendauer = 2 });
+            schoolClasses["3BHIF"].AddSchueler(new Student() { Id = 1011, FirstName = "VN4", LastName = "ZN4", MaximaleStudiendauer = 2 });
+            schoolClasses["3BHIF"].AddSchueler(new Student() { Id = 1012, FirstName = "VN5", LastName = "ZN5", MaximaleStudiendauer = 2 });
+            schoolClasses["3BHIF"].AddSchueler(new Student() { Id = 1013, FirstName = "VN6", LastName = "ZN6", MaximaleStudiendauer = 7 });
+            schoolClasses["3CHIF"].AddSchueler(new Student() { Id = 1021, FirstName = "VN7", LastName = "ZN7", MaximaleStudiendauer = 7 });
+           // schoolClasses["3CHIF"].AddSchueler(new Teacher() { Id = 1021, FirstName = "VN7", LastName = "ZN7"});
 
-            Schueler s = klassen["3AHIF"].Schuelers[0];
+
+            Student s = schoolClasses["3AHIF"].Schuelers[0];
             Console.WriteLine($"s sitzt in der Klasse {s.KlasseNavigation.Name} mit dem KV {s.KlasseNavigation.KV}.");
             Console.WriteLine("3AHIF vor ChangeKlasse:");
-            Console.WriteLine(JsonConvert.SerializeObject(klassen["3AHIF"].Schuelers));
-            s.ChangeKlasse(klassen["3BHIF"]);
+            Console.WriteLine(JsonConvert.SerializeObject(schoolClasses["3AHIF"].Schuelers));
+            s.ChangeKlasse(schoolClasses["3BHIF"]);
             Console.WriteLine("3AHIF nach ChangeKlasse:");
-            Console.WriteLine(JsonConvert.SerializeObject(klassen["3AHIF"].Schuelers));
+            Console.WriteLine(JsonConvert.SerializeObject(schoolClasses["3AHIF"].Schuelers));
             Console.WriteLine("3BHIF nach ChangeKlasse:");
-            Console.WriteLine(JsonConvert.SerializeObject(klassen["3BHIF"].Schuelers));
+            Console.WriteLine(JsonConvert.SerializeObject(schoolClasses["3BHIF"].Schuelers));
             Console.WriteLine($"s sitzt in der Klasse {s.KlasseNavigation.Name} mit dem KV {s.KlasseNavigation.KV}.");
+
+            KuerzesteStudienDauer(schoolClasses["3AHIF"]);
+
+            Console.WriteLine(schoolClasses["3AHIF"].Schuelers[0].FullName); // Lehrer wird nicht aufgenommen
+        }
+
+        private static void KuerzesteStudienDauer(SchoolClass k)
+        {
+            // 0. Initialisierung mit Maximalwert
+            // ODER // 1. erste Dauer merken
+            // 2. Pruefung ob die naechste Dauer kleiner oder groeser ist
+            // 2.1 Wenn groesser: nicht zu tun; zum naechsten Schueler gehen
+            // 2.2 Wenn kleiner: ueberscreiben wir den ersten Wert mit dem neuen Minimum 
+
+            int minWert = 7;
+            foreach (Student item in k.Schuelers)
+            {
+                if (item.MaximaleStudiendauer < minWert)
+                {
+                    if(item is Student)
+                    {
+                        minWert = item.MaximaleStudiendauer;
+                    }
+                }
+            }
+            Console.WriteLine($"Miminale Studiendauer un dieser Klasse {k?.Name ?? "unbekannt"} ist: {minWert}");
+        }
+
+
+    }
+
+    public class GalerijaStudent
+    {
+        public Dictionary<string, List<Student>> kolekcije = new Dictionary<string, List<Student>>();
+
+        public void AddToCollection(string imeKolekcije, Student s)  // dodaje ImagePost ip u zadatu kolekciju
+        {
+            kolekcije[imeKolekcije].Add(s);
+        }
+
+        public int StudentCount(string imeKolekcije)  // izbrojim koliko je ImagePostova u nekoj kolekciji
+        {
+            return kolekcije[imeKolekcije].Count;
+        }
+
+        public Dictionary<string, List<Person>> kolekcijaPostova = new Dictionary<string, List<Person>>();  // kljuc - vrednost
+        public int StudentCount1(string imeKolekcije)  // izbrojim koliko je ImagePostova u nekoj kolekciji
+        {
+            // return kolekcijaPostova[imeKolekcije].Count(post => post is ImagePost);
+
+            int num = 0;
+            foreach (Person p in kolekcijaPostova[imeKolekcije])
+            {
+                if (p is Student) 
+                {
+                    num++;
+                }
+            }
+
+            // kolekcijaPostova.Keys.Contains(imeKolekcije); // vraca true / false
+
+            return num;
         }
     }
 }
+
+

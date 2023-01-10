@@ -2,7 +2,7 @@
 {
     public class ProductCategory
     {
-        public string Name { get; } = string.Empty; // pk
+        public string Name { get; private set; } = string.Empty; // pk
 
         public string Description { get; set; } = string.Empty;
 

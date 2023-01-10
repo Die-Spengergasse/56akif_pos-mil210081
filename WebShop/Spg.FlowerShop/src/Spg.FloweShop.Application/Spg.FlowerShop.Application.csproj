@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Spg.FlowerShop.Domain\Spg.FlowerShop.Domain.csproj" />
+    <ProjectReference Include="..\Spg.FloweShop.Repository\Spg.FlowerShop.Repository.csproj" />
+  </ItemGroup>
+
+</Project>

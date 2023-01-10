@@ -2,7 +2,7 @@
 {
     public class Price
     {
-        public int Id { get; }
+        public int Id { get; private set; }
 
         public decimal Value { get; set; } = decimal.MinValue;
 

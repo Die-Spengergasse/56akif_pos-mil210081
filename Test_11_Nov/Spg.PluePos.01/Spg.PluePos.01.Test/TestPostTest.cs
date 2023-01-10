@@ -168,7 +168,7 @@ namespace Spg.PluePos._01.Test
         public void TestSmartPhoneAppIteratorReturnsNull()
         {
             string expected = null;
-            Assert.Equal(expected, _posts["TextPost 4711"]?.Html ?? null); 
+            Assert.Equal(expected, _posts["TextPost 4711"]?.Html ?? null);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Spg.PluePos._01.Model
 {
     public abstract class Post
     {
-        public string Title { get; }
+        public string Title { get; } // oder private setter 
 
         public DateTime Created { get; }
 
@@ -32,7 +32,8 @@ namespace Spg.PluePos._01.Model
 
         public abstract string Html { get; }
 
-        public SmartPhoneApp? SmartPhone { get; set; } 
+        public SmartPhoneApp? SmartPhone { get; set; } // = new(); ne sme tako jel ce da baci gresku jer nema parametar koji je definisan u konstruktoru
+        // sa  = new("braucht Parameter"); radice
 
         // Konstruktor
         protected Post(string title, DateTime created)
@@ -45,7 +46,7 @@ namespace Spg.PluePos._01.Model
             Created = created;
         }
 
-        public Post(string title) : this(title, DateTime.Now)
+        public Post(string title) : this(title, DateTime.Now) // this pokazuje na konstr. iznad
         {
         }
 

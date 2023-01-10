@@ -9,15 +9,15 @@
 
     public class Customer
     {
-        public int Id { get; }
+        public int Id { get; private set; } // zbog OR Mappera mora da postoji set!
         public Genders Gender { get; set; }
-        public string CustomerNumber { get; set; } = string.Empty;
+        public long CustomerNumber { get; private set; }  // long
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public DateTime? BirthDate { get; set; } // = DateTime.MinValue; [optional]
-        public string ShippingAddress { get; set; } = string.Empty; 
-        public string? BillingAddress { get; set; } = string.Empty; 
+        public ShippingAddress? ShippingAddress { get; set; } = default!; //
+        public BillingAddress? BillingAddress { get; set; } = default!; 
         public DateTime RegistrationDateTime { get; }
 
         // 1 CustomerNavigation kann mehr ShoppingCarts haben
@@ -26,7 +26,8 @@
 
         private List<Review> _reviews = new();
         public IReadOnlyList<Review> Reviews => _reviews;
-        public Customer(Genders gender, string customerNumber, string firstName, string lastName, string email, DateTime birthDate, string shippingAddress, string billingAddress, DateTime registrationDateTime)
+
+        public Customer(Genders gender, long customerNumber, string firstName, string lastName, string email, DateTime birthDate, DateTime registrationDateTime)
         {
             Gender = gender;
             CustomerNumber = customerNumber;
@@ -34,14 +35,12 @@
             LastName = lastName;
             Email = email;
             BirthDate = birthDate;
-            ShippingAddress = shippingAddress;
-            BillingAddress = billingAddress;
             RegistrationDateTime = registrationDateTime;
         }
 
         protected Customer()
         { }
-
+        
         // TO DO : Authentification 
         // TO DO : Username
         // TO DO : Password string
